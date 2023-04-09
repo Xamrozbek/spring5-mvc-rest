@@ -35,7 +35,7 @@ class VenderControllerTest extends AbstractRestControllerTest {
     private VendorSerice vendorSerice;
 
     @InjectMocks
-    private VenderController venderController;
+    private VendorController venderController;
 
     private MockMvc mockMvc;
 

@@ -30,7 +30,7 @@ public class CategoryController {
 
     @GetMapping
     @Operation(summary = "Get all categories")
-    @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
     @ApiResponse(responseCode = "404", description = "Category not fount", content = @Content)
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         return new ResponseEntity<>(categoryService.getAllCategories(), OK);
@@ -38,23 +38,32 @@ public class CategoryController {
 
     @GetMapping("/{name}")
     @Operation(summary = "search category")
-    @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
     @ApiResponse(responseCode = "404", description = "Category not fount", content = @Content)
     private ResponseEntity<CategoryDTO> getByName(@PathVariable String name) {
         return new ResponseEntity<>(categoryService.getCategpryByName(name), OK);
     }
 
     @PostMapping
+    @Operation(summary = "Create category")
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Category not found", content = @Content)
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
         return new ResponseEntity<>(categoryService.createCategory(categoryDTO), CREATED);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Category update")
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Category not found")
     public ResponseEntity<CategoryDTO> updatedCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
         return new ResponseEntity<>(categoryService.updateCategory(id, categoryDTO), OK);
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Category delete")
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = CategoryDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Category not found", content = @Content)
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
         return new ResponseEntity<>(OK);
